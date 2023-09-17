@@ -13,7 +13,9 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     setBackground,
     setView,
     collapseNavBoard,
-    setCollapseNavBoard
+    setCollapseNavBoard,
+    camera,
+    setCamera
   } = useCanvas();
   const {
     showSettings,
@@ -34,6 +36,10 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     e.stopPropagation();
     if (zoom >= 2) return;
     setZoom(zoom + 0.1);
+    setCamera({
+      ...camera,
+      z: camera.z - 100
+    })
   };
 
   const handleZoomMinus = (e: KeyboardEvent) => {
@@ -41,12 +47,20 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     e.stopPropagation();
     if (zoom <= 0.5) return;
     setZoom(zoom - 0.1);
+    setCamera({
+      ...camera,
+      z: camera.z + 100
+    })
   };
 
   const handleZoomReset = (e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
     setZoom(1);
+    setCamera({
+      ...camera,
+      z: 1000
+    })
   };
 
   const handleCDM = (e: KeyboardEvent) => {

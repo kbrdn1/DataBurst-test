@@ -21,8 +21,16 @@ import {
 import { DropdownMenuShortcut } from '@/components/ui/dropdown-menu';
 
 const NavTools = () => {
-  const { zoom, setZoom } = useCanvas();
+  const { zoom, setZoom, camera, setCamera } = useCanvas();
   const { mode, setMode } = useMode();
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setCamera({
+      ...camera,
+      z: 1000
+    });
+  }
 
   return (
     <nav className='flex shadow p-2 border rounded-xl justify-between fixed z-50 w-fit bg-background top-4 left-1/2 -translate-x-1/2'>
@@ -193,10 +201,10 @@ const NavTools = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button variant='ghost' onClick={() => setZoom(1)}>
-                  <span className='text-sm'>{`${(zoom * 100).toFixed(
-                    0
-                  )} %`}</span>
+                <Button variant='ghost' onClick={handleResetZoom}>
+                  <span className='text-sm whitespace-nowrap'>{`${(
+                    zoom * 100
+                  ).toFixed(0)} %`}</span>
                 </Button>
               </TooltipTrigger>
               <TooltipContent className='flex gap-2 items-center'>

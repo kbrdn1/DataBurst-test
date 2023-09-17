@@ -1,32 +1,33 @@
-import CanvasStore from './CanvasStore';
+import useCanvas from '@/hooks/useCanvas';
 import { PointerEvent, useEffect, useRef, WheelEvent } from 'react';
 import useSize from '@react-hook/size';
 import InfiniteCanvas from './InfiniteCanvas';
 import useRenderLoop from './RenderLoop';
 
-const wheelListener = (e: WheelEvent) => {
-  const friction = 1;
-  const deltaX = e.deltaX * friction;
-  const deltaY = e.deltaY * friction;
-  if (!e.ctrlKey) {
-    CanvasStore.moveCamera(deltaX, deltaY);
-  } else {
-    CanvasStore.zoomCamera(deltaX, deltaY);
-  }
-};
-
-const pointerListener = (event: PointerEvent) => {
-  CanvasStore.movePointer(event.clientX, event.clientY);
-};
-
 const CanvasRoot = () => {
+  const { moveCamera, zoomCamera, movePointer, initialize } = useCanvas();
   const canvas = useRef<HTMLDivElement>(null);
   const [width, height] = useSize(canvas);
   useEffect(() => {
     if (width === 0 || height === 0) return;
-    CanvasStore.initialize(width, height);
+    initialize(width, height);
   }, [width, height]);
   const frame = useRenderLoop(144);
+  
+  const wheelListener = (e: WheelEvent) => {
+    const friction = 1;
+    const deltaX = e.deltaX * friction;
+    const deltaY = e.deltaY * friction;
+    if (!e.ctrlKey) {
+      moveCamera(deltaX, deltaY);
+    } else {
+      zoomCamera(deltaX, deltaY);
+    }
+  };
+
+  const pointerListener = (event: PointerEvent) => {
+    movePointer(event.clientX, event.clientY);
+  };
   return (
     <div className='w-full h-full'>
       <div

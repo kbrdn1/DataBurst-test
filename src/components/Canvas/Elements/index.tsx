@@ -1,7 +1,7 @@
-import CanvasStore from '../CanvasStore';
+import useCanvas from '@/hooks/useCanvas';
 import { PropsWithChildren } from 'react';
 import { inBounds } from '@/utils/math-utils';
-import { CanvasPosition } from '@/types';
+import { CanvasPosition, Screen } from '@/types';
 
 const Position = ({
   left,
@@ -10,7 +10,8 @@ const Position = ({
   height,
   children
 }: PropsWithChildren<CanvasPosition>) => {
-  const screen = CanvasStore.screen;
+  const { getScreen } = useCanvas();
+  const screen: Screen = getScreen();
 
   if (
     inBounds(

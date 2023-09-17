@@ -1,4 +1,4 @@
-import CanvasStore from "./CanvasStore";
+import useCanvas from "@/hooks/useCanvas";
 import { useEffect, useRef, useState } from "react";
 
 class RenderLoop {
@@ -42,18 +42,19 @@ export function getRenderLoop(fps = 15, draw: () => void) {
 }
 
 export const useRenderLoop = (fps: number = 15) => {
+  const { shouldRender, setShouldRender } = useCanvas();
   const [frame, setFrame] = useState("0");
   const loop = useRef<RenderLoop>(
     getRenderLoop(fps, () => {
-      if (CanvasStore.shouldRender) {
+      if (shouldRender) {
         setFrame(`${performance.now()}`);
-        CanvasStore.shouldRender = false;
+        setShouldRender(false);
       }
     })
   );
 
   useEffect(() => {
-    CanvasStore.shouldRender = true;
+    setShouldRender(true);
     loop.current.start();
 
     return () => loop.current.stop();

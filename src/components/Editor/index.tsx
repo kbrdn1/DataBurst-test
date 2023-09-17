@@ -21,6 +21,11 @@ const Editor = ({ children }: PropsWithChildren) => {
       defaultBackground='dots'
       defaultView='CDM'
       defaultCollapseNavBoard={false}
+      defaultShouldRender={true}
+      defaultPixelRatio={window.devicePixelRatio || 1}
+      defaultContainer={{ width: 0, height: 0 }}
+      defaultPointer={{ x: 0, y: 0 }}
+      defaultCamera={{ x: 0, y: 0, z: 0 }}
       storageKey='canvas-ui'
     >
       <ScriptProvider

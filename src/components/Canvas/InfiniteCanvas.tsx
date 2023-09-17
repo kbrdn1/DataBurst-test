@@ -1,7 +1,7 @@
-import { Entity } from '@/types';
+import { Entity, Scale } from '@/types';
 import { memo } from 'react';
 import EntityElement from './Elements/Entity';
-import CanvasStore from './CanvasStore';
+import useCanvas from '@/hooks/useCanvas';
 
 const entity: Entity = {
   _id: 1,
@@ -43,7 +43,8 @@ const entity: Entity = {
 };
 
 const InfiniteCanvas = ({ frame }: { frame: string }) => {
-  const scale = CanvasStore.scale;
+  const { getScale } = useCanvas();
+  const scale: Scale = getScale();
 
   return (
     <div
