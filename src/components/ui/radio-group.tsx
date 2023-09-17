@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import { Check, Circle } from 'lucide-react';
+import { Circle } from 'lucide-react'
 
 import { cn } from '@/utils';
 
@@ -28,7 +28,7 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   RadioGroupItemProps
->(({ className, children, checkmark, ...props }, ref) => {
+>(({ className, checkmark, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
       ref={ref}

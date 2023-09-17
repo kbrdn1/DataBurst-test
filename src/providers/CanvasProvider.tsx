@@ -10,7 +10,7 @@ import {
   Screen,
   Scale
 } from '@/types';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { CAMERA_ANGLE, RECT_H, RECT_W } from '@/utils/constants';
 import {
   cameraToScreenCoordinates,
@@ -93,7 +93,7 @@ const CanvasProvider = ({
     return defaultCamera;
   });
 
-  const initialize = (width: number, height: number) => {
+  const initialize = useCallback((width: number, height: number) => {
     setPixelRatio(window.devicePixelRatio || 1);
     setContainer({ width, height });
     setCamera({
@@ -101,29 +101,30 @@ const CanvasProvider = ({
       y: 1.5 * RECT_H,
       z: width / (2 * Math.tan(CAMERA_ANGLE))
     });
-  };
+  }, []);
 
-  const getAspect = () => {
+  const getAspect = useCallback(() => {
     const { width, height } = container;
     return width / height;
-  };
-  const getScreen = (): Screen => {
+  }, [container]);
+
+  const getScreen = useCallback((): Screen => {
     const { x, y, z } = camera;
     const aspect = getAspect();
     const angle = CAMERA_ANGLE;
     return cameraToScreenCoordinates(x, y, z, angle, aspect);
-  };
+  }, [camera, getAspect]);
 
-  const getScale = (): Scale => {
+  const getScale = useCallback((): Scale => {
     const { width: screenWidth, height: screenHeight } = getScreen();
     const { width: containerWidth, height: containerHeight } = container;
     return {
       x: containerWidth / screenWidth,
       y: containerHeight / screenHeight
     };
-  };
+  }, [getScreen, container]);
 
-  const isCameraInBounds = (
+  const isCameraInBounds = useCallback((
     cameraX: number,
     cameraY: number,
     cameraZ: number
@@ -140,9 +141,17 @@ const CanvasProvider = ({
     // const isXInBounds = x >= 0 && x <= this.data.canvas.width;
     // const isYInBounds = y >= 0 && y <= this.data.canvas.height;
     // return isXInBounds && isYInBounds;
-  };
+  }, []);
 
-  const moveCamera = (mx: number, my: number) => {
+    const movePointer = useCallback((deltaX: number, deltaY: number) => {
+    const scale = getScale();
+    const { x: left, y: top } = getScreen();
+    const newX = left + deltaX / scale.x;
+    const newY = top + deltaY / scale.y;
+    setPointer({ x: newX, y: newY });
+  }, [getScale, getScreen, setPointer]);
+
+  const moveCamera = useCallback((mx: number, my: number) => {
     const scrollFactor = 1.5;
     const deltaX = mx * scrollFactor,
       deltaY = my * scrollFactor;
@@ -154,9 +163,9 @@ const CanvasProvider = ({
       setShouldRender(true);
       movePointer(deltaY, deltaY);
     }
-  };
+  }, [camera, setShouldRender, isCameraInBounds, movePointer])
 
-  const zoomCamera = (deltaX: number, deltaY: number) => {
+  const zoomCamera = useCallback((_: number, deltaY: number) => {
     // Normal zoom is quite slow, we want to scale the amount quite a bit
     const zoomScaleFactor = 10;
     const deltaAmount = zoomScaleFactor * Math.max(deltaY);
@@ -195,15 +204,7 @@ const CanvasProvider = ({
       });
       setZoom(newZ/1000);
     }
-  };
-
-  const movePointer = (deltaX: number, deltaY: number) => {
-    const scale = getScale();
-    const { x: left, y: top } = getScreen();
-    const newX = left + deltaX / scale.x;
-    const newY = top + deltaY / scale.y;
-    setPointer({ x: newX, y: newY });
-  };
+  },[camera, container, pointer, setCamera, setZoom, setShouldRender, getScale, getAspect, isCameraInBounds])
 
   useEffect(() => {
     const storage = {
@@ -286,7 +287,13 @@ const CanvasProvider = ({
     pixelRatio,
     container,
     pointer,
-    camera
+    camera,
+    initialize,
+    moveCamera,
+    zoomCamera,
+    movePointer,
+    getScale,
+    getScreen
   ]);
 
   return (

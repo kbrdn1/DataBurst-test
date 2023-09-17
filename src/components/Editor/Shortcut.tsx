@@ -117,55 +117,55 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     <>
       <Hotkeys
         keyName='control+B,control+b,command+B,command+b'
-        onKeyDown={(shortcut, evn) => handleChangeBackground(evn)}
+        onKeyDown={(_, evn) => handleChangeBackground(evn)}
       >
         <Hotkeys
           keyName='control+plus,command+plus,control+=,command+='
-          onKeyDown={(shortcut, evn) => handleZoomPlus(evn)}
+          onKeyDown={(_, evn) => handleZoomPlus(evn)}
           allowRepeat
         >
           <Hotkeys
             keyName='control+minus,command+minus,control+-,command+-,control+6,command+6'
-            onKeyDown={(shortcut, evn) => handleZoomMinus(evn)}
+            onKeyDown={(_, evn) => handleZoomMinus(evn)}
             allowRepeat
           >
             <Hotkeys
               keyName='control+0,command+0,control+à,command+à'
-              onKeyDown={(shortcut, evn) => handleZoomReset(evn)}
+              onKeyDown={(_, evn) => handleZoomReset(evn)}
             >
               <Hotkeys
                 keyName='control+&,command+&,control+1,command+1'
-                onKeyDown={(shortcut, evn) => handleCDM(evn)}
+                onKeyDown={(_, evn) => handleCDM(evn)}
               >
                 <Hotkeys
                   keyName='control+é,command+é,control+2,command+2'
-                  onKeyDown={(shortcut, evn) => handleUML(evn)}
+                  onKeyDown={(_, evn) => handleUML(evn)}
                 >
                   <Hotkeys
                     keyName='control+",command+",control+3,command+3'
-                    onKeyDown={(shortcut, evn) => handleLDM(evn)}
+                    onKeyDown={(_, evn) => handleLDM(evn)}
                   >
                     <Hotkeys
                       keyName='control+q,command+q,control+Q,command+Q'
-                      onKeyDown={(shortcut, evn) => handleCollapseNavBoard(evn)}
+                      onKeyDown={(_, evn) => handleCollapseNavBoard(evn)}
                     >
                       <Hotkeys
                         keyName='control+/,command+/,control+:,command+:'
-                        onKeyDown={(shortcut, evn) => handleToggleSettings(evn)}
+                        onKeyDown={(_, evn) => handleToggleSettings(evn)}
                       >
                         <Hotkeys
                           keyName='control+,,command+,,control+?,command+?'
-                          onKeyDown={(shortcut, evn) =>
+                          onKeyDown={(_, evn) =>
                             handleToggleHelpFeedback(evn)
                           }
                         >
                           <Hotkeys
                             keyName='control+o,command+o,control+O,command+O'
-                            onKeyDown={(shortcut, evn) => handleSQL(evn)}
+                            onKeyDown={(_, evn) => handleSQL(evn)}
                           >
                             <Hotkeys
                               keyName='control+l,command+l,control+L,command+L'
-                              onKeyDown={(shortcut, evn) => handlePDM(evn)}
+                              onKeyDown={(_, evn) => handlePDM(evn)}
                             >
                               {children}
                             </Hotkeys>

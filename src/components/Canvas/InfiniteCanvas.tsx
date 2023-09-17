@@ -42,7 +42,9 @@ const entity: Entity = {
   }
 };
 
-const InfiniteCanvas = ({ frame }: { frame: string }) => {
+const InfiniteCanvas = (
+  // {frame} : {frame: string}
+) => {
   const { getScale } = useCanvas();
   const scale: Scale = getScale();
 
@@ -59,4 +61,5 @@ const InfiniteCanvas = ({ frame }: { frame: string }) => {
   );
 };
 
-export default memo(InfiniteCanvas) as typeof InfiniteCanvas;
+const MemoizedInfiniteCanvas = memo(InfiniteCanvas);
+export default MemoizedInfiniteCanvas;

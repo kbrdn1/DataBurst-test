@@ -2,7 +2,7 @@ import useCanvas from '@/hooks/useCanvas';
 import { PointerEvent, useEffect, useRef, WheelEvent } from 'react';
 import useSize from '@react-hook/size';
 import InfiniteCanvas from './InfiniteCanvas';
-import useRenderLoop from './RenderLoop';
+// import useRenderLoop from './RenderLoop';
 
 const CanvasRoot = () => {
   const { moveCamera, zoomCamera, movePointer, initialize } = useCanvas();
@@ -11,8 +11,8 @@ const CanvasRoot = () => {
   useEffect(() => {
     if (width === 0 || height === 0) return;
     initialize(width, height);
-  }, [width, height]);
-  const frame = useRenderLoop(144);
+  }, [width, height, initialize]);
+  // const frame = useRenderLoop(144);
   
   const wheelListener = (e: WheelEvent) => {
     const friction = 1;
@@ -36,7 +36,9 @@ const CanvasRoot = () => {
         onWheel={wheelListener}
         onPointerMove={pointerListener}
       >
-        <InfiniteCanvas frame={frame}></InfiniteCanvas>
+        <InfiniteCanvas
+          // frame={frame}
+        ></InfiniteCanvas>
       </div>
     </div>
   );
