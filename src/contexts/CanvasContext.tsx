@@ -9,8 +9,6 @@ const initialState: CanvasProviderState = {
   setBackground: () => null,
   view: 'CDM',
   setView: () => null,
-  collapseNavBoard: false, // editor
-  setCollapseNavBoard: () => null, // editor
   shouldRender: true,
   setShouldRender: () => null,
   pixelRatio: window.devicePixelRatio || 1,

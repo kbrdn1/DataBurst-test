@@ -1,9 +1,9 @@
 // import EntityForm from '@/components/Forms/EntityForm';
 import useCanvas from '@/hooks/useCanvas';
-import useMode from '@/hooks/useMode';
+import useEditor from '@/hooks/useEditor';
 import {
   MouseEvent,
-  PropsWithChildren,
+  PropsWithChildren
   // useState
 } from 'react';
 import ChangeMode from './ChangeMode';
@@ -11,7 +11,7 @@ import Shortcut from './Shortcut';
 
 const Area = ({ children }: PropsWithChildren) => {
   const { background } = useCanvas();
-  const { mode, setMode } = useMode();
+  const { mode, setMode } = useEditor();
   // const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   // const [showEntityForm, setShowEntityForm] = useState<boolean>(false);
 
@@ -34,12 +34,12 @@ const Area = ({ children }: PropsWithChildren) => {
       `}
           onClick={handleClick}
         >
-            {/* <EntityForm
+          {/* <EntityForm
               show={showEntityForm}
               setShow={setShowEntityForm}
               position={mousePosition}
             /> */}
-            {children}
+          {children}
         </section>
       </Shortcut>
     </ChangeMode>

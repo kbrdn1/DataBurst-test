@@ -7,12 +7,12 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip';
-import useScript from '@/hooks/useScript';
+import useEditor from '@/hooks/useEditor';
 import { ScriptProps } from '@/types';
 import { X } from 'lucide-react';
 
 const NavScript = () => {
-  const { showScript, setShowScript, scriptView, setScriptView } = useScript();
+  const { showScript, setShowScript, scriptView, setScriptView } = useEditor();
 
   const handleSQL = () => {
     setScriptView('SQL');

@@ -1,9 +1,9 @@
 import Hotkeys from 'react-hot-keys';
-import useMode from '@/hooks/useMode';
+import useEditor from '@/hooks/useEditor';
 import { PropsWithChildren } from 'react';
 
 const ChangeMode = ({ children }: PropsWithChildren) => {
-  const { setMode } = useMode();
+  const { setMode } = useEditor();
   return (
     <>
       <Hotkeys keyName='v,V,Escape' onKeyDown={() => setMode('normal')}>

@@ -1,6 +1,5 @@
 import useCanvas from '@/hooks/useCanvas';
-import useOptions from '@/hooks/useOptions';
-import useScript from '@/hooks/useScript';
+import useEditor from '@/hooks/useEditor';
 import { backgrounds } from '@/utils/constants';
 import { PropsWithChildren } from 'react';
 import Hotkeys from 'react-hot-keys';
@@ -21,9 +20,10 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     showSettings,
     setShowSettings,
     showHelpFeedback,
-    setShowHelpFeedback
-  } = useOptions();
-  const { setShowScript, setScriptView } = useScript();
+    setShowHelpFeedback,
+    setShowScript,
+    setScriptView
+  } = useEditor();
 
   const handleChangeBackground = (e: KeyboardEvent) => {
     e.preventDefault();

@@ -22,7 +22,6 @@ const CanvasProvider = ({
   defaultZoom = 1,
   defaultBackground = 'dots',
   defaultView = 'CDM',
-  defaultCollapseNavBoard = false,
   defaultShouldRender = true,
   defaultPixelRatio = window.devicePixelRatio || 1,
   defaultContainer = { width: 0, height: 0 },
@@ -49,13 +48,6 @@ const CanvasProvider = ({
     if (storage) JSON.parse(storage).view || defaultView;
 
     return defaultView;
-  });
-
-  const [collapseNavBoard, setCollapseNavBoard] = useState<boolean>(() => {
-    const storage = localStorage.getItem(storageKey);
-    if (storage) JSON.parse(storage).collapseNavBord || defaultCollapseNavBoard;
-
-    return defaultCollapseNavBoard;
   });
 
   const [shouldRender, setShouldRender] = useState<boolean>(() => {
@@ -211,7 +203,6 @@ const CanvasProvider = ({
       zoom,
       background,
       view,
-      collapseNavBoard,
       shouldRender,
       pixelRatio,
       container,
@@ -223,7 +214,6 @@ const CanvasProvider = ({
     zoom,
     background,
     view,
-    collapseNavBoard,
     shouldRender,
     pixelRatio,
     container,
@@ -245,11 +235,6 @@ const CanvasProvider = ({
       view,
       setView: (view: View) => {
         setView(view);
-      },
-      collapseNavBoard, // editor
-      setCollapseNavBoard: (collapseNavBord: boolean) => {
-        // editor
-        setCollapseNavBoard(collapseNavBord);
       },
       shouldRender,
       setShouldRender: (shouldRender: boolean) => {
@@ -282,7 +267,6 @@ const CanvasProvider = ({
     zoom,
     background,
     view,
-    collapseNavBoard,
     shouldRender,
     pixelRatio,
     container,

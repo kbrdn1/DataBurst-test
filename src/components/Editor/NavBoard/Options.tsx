@@ -16,7 +16,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import useCanvas from '@/hooks/useCanvas';
-import useOptions from '@/hooks/useOptions';
+import useEditor from '@/hooks/useEditor';
 import useTheme from '@/hooks/useTheme';
 import { Background, Theme, Color } from '@/types';
 import {
@@ -42,7 +42,7 @@ export default Options;
 
 const Settings = () => {
   const { showSettings, setShowSettings, settings, setSettings } =
-    useOptions();
+    useEditor();
 
   const AppearenceSection = () => {
     const { background, setBackground } = useCanvas(),
@@ -316,7 +316,7 @@ const Import = () => {
 };
 
 const HelpFeedback = () => {
-  const { showHelpFeedback, setShowHelpFeedback } = useOptions();
+  const { showHelpFeedback, setShowHelpFeedback } = useEditor();
   return (
     <Dialog open={showHelpFeedback} onOpenChange={setShowHelpFeedback}>
       <DialogTrigger asChild>

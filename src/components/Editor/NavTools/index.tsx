@@ -6,7 +6,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip';
 import useCanvas from '@/hooks/useCanvas';
-import useMode from '@/hooks/useMode';
+import useEditor from '@/hooks/useEditor';
 import {
   BoxSelect,
   Hand,
@@ -22,7 +22,7 @@ import { DropdownMenuShortcut } from '@/components/ui/dropdown-menu';
 
 const NavTools = () => {
   const { zoom, setZoom, camera, setCamera } = useCanvas();
-  const { mode, setMode } = useMode();
+  const { mode, setMode } = useEditor();
 
   const handleResetZoom = () => {
     setZoom(1);
@@ -30,7 +30,7 @@ const NavTools = () => {
       ...camera,
       z: 1000
     });
-  }
+  };
 
   return (
     <nav className='flex shadow p-2 border rounded-xl justify-between fixed z-50 w-fit bg-background top-4 left-1/2 -translate-x-1/2'>

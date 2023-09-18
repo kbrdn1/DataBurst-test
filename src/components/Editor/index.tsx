@@ -1,8 +1,6 @@
 import CanvasProvider from '@/providers/CanvasProvider';
 import EntityProvider from '@/providers/EntityProvider';
-import ModeProvider from '@/providers/ModeProvider';
-import ScriptProvider from '@/providers/ScriptProvider';
-import OptionsProvider from '@/providers/OptionsProvider';
+import EditorProvider from '@/providers/EditorProvider';
 import { Entity } from '@/types';
 import { PropsWithChildren } from 'react';
 import Area from './Area';
@@ -20,7 +18,6 @@ const Editor = ({ children }: PropsWithChildren) => {
       defaultZoom={1}
       defaultBackground='dots'
       defaultView='CDM'
-      defaultCollapseNavBoard={false}
       defaultShouldRender={true}
       defaultPixelRatio={window.devicePixelRatio || 1}
       defaultContainer={{ width: 0, height: 0 }}
@@ -28,30 +25,27 @@ const Editor = ({ children }: PropsWithChildren) => {
       defaultCamera={{ x: 0, y: 0, z: 0 }}
       storageKey='canvas-ui'
     >
-      <ScriptProvider
+      <EditorProvider
+        defaultMode='normal'
+        defaultShowSettings={false}
+        defaultSettings='appearance'
+        defaultShowHelpFeedback={false}
         defaultShowScript={false}
         defaultScriptView='SQL'
-        storageKey='script'
+        defaultCollapseNavBoard={false}
+        storageKey='editor-ui'
       >
-        <OptionsProvider
-          defaultSettings='appearance'
-          defaultShowHelpFeedback={false}
-          storageKey='options'
+        <EntityProvider
+          defaultEntities={defaultEntitie}
+          storageKey='data-entity'
         >
-          <EntityProvider
-            defaultEntities={defaultEntitie}
-            storageKey='data-entity'
-          >
-            <ModeProvider defaultMode='normal' storageKey='mode'>
-              <Area>{children}</Area>
-              <NavBoard />
-              <NavTools />
-              <NavElements />
-              <NavScript />
-            </ModeProvider>
-          </EntityProvider>
-        </OptionsProvider>
-      </ScriptProvider>
+          <Area>{children}</Area>
+          <NavBoard />
+          <NavTools />
+          <NavElements />
+          <NavScript />
+        </EntityProvider>
+      </EditorProvider>
     </CanvasProvider>
   );
 };

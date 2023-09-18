@@ -5,32 +5,11 @@ export interface CanvasPosition {
   height: number;
 }
 
-export interface CanvasState {
-  shouldRender: boolean;
-  pixelRatio: number; // our resolution for dip calculations
-  container: {
-    //holds information related to our screen container
-    width: number;
-    height: number;
-  };
-  pointer: {
-    x: number;
-    y: number;
-  };
-  camera: {
-    //holds camera state
-    x: number;
-    y: number;
-    z: number;
-  };
-}
-
 export type CanvasProviderProps = {
   children: React.ReactNode;
   defaultZoom?: number;
   defaultBackground?: Background;
   defaultView?: View;
-  defaultCollapseNavBoard?: boolean;
   defaultShouldRender?: boolean;
   defaultPixelRatio?: number;
   defaultContainer?: {
@@ -82,8 +61,6 @@ export type CanvasProviderState = {
   setBackground: (background: Background) => void;
   view: View;
   setView: (view: View) => void;
-  collapseNavBoard: boolean; // editor
-  setCollapseNavBoard: (collapseNavBoard: boolean) => void; // editor
   shouldRender: boolean;
   setShouldRender: (shouldRender: boolean) => void;
   pixelRatio: number;
