@@ -101,103 +101,125 @@ const CanvasProvider = ({
   }, [container]);
 
   const getScreen = useCallback((): Screen => {
-    const { x, y, z } = camera;
-    const aspect = getAspect();
-    const angle = CAMERA_ANGLE;
+    const { x, y, z } = camera,
+      aspect = getAspect(),
+      angle = CAMERA_ANGLE;
     return cameraToScreenCoordinates(x, y, z, angle, aspect);
   }, [camera, getAspect]);
 
   const getScale = useCallback((): Scale => {
-    const { width: screenWidth, height: screenHeight } = getScreen();
-    const { width: containerWidth, height: containerHeight } = container;
+    const { width: screenWidth, height: screenHeight } = getScreen(),
+      { width: containerWidth, height: containerHeight } = container;
     return {
       x: containerWidth / screenWidth,
       y: containerHeight / screenHeight
     };
   }, [getScreen, container]);
 
-  const isCameraInBounds = useCallback((
-    cameraX: number,
-    cameraY: number,
-    cameraZ: number
-  ): boolean => {
-    return cameraX && cameraY && cameraZ ? true : false;
-    // const angle = radians(30);
-    // const { x, y, width, height } = cameraToScreenCoordinates(
-    //   cameraX,
-    //   cameraY,
-    //   cameraZ,
-    //   angle,
-    //   this.aspect
-    // );
-    // const isXInBounds = x >= 0 && x <= this.data.canvas.width;
-    // const isYInBounds = y >= 0 && y <= this.data.canvas.height;
-    // return isXInBounds && isYInBounds;
-  }, []);
+  const isCameraInBounds = useCallback(
+    (cameraX: number, cameraY: number, cameraZ: number): boolean => {
+      return cameraX && cameraY && cameraZ ? true : false;
+      // const angle = radians(30);
+      // const { x, y, width, height } = cameraToScreenCoordinates(
+      //   cameraX,
+      //   cameraY,
+      //   cameraZ,
+      //   angle,
+      //   this.aspect
+      // );
+      // const isXInBounds = x >= 0 && x <= this.data.canvas.width;
+      // const isYInBounds = y >= 0 && y <= this.data.canvas.height;
+      // return isXInBounds && isYInBounds;
+    },
+    []
+  );
 
-    const movePointer = useCallback((deltaX: number, deltaY: number) => {
-    const scale = getScale();
-    const { x: left, y: top } = getScreen();
-    const newX = left + deltaX / scale.x;
-    const newY = top + deltaY / scale.y;
-    setPointer({ x: newX, y: newY });
-  }, [getScale, getScreen, setPointer]);
+  const movePointer = useCallback(
+    (deltaX: number, deltaY: number) => {
+      const scale = getScale(),
+        { x: left, y: top } = getScreen(),
+        newX = left + deltaX / scale.x,
+        newY = top + deltaY / scale.y;
+      setPointer({ x: newX, y: newY });
+    },
+    [getScale, getScreen, setPointer]
+  );
 
-  const moveCamera = useCallback((mx: number, my: number) => {
-    const scrollFactor = 1.5;
-    const deltaX = mx * scrollFactor,
-      deltaY = my * scrollFactor;
-    const { x, y, z } = camera;
-    if (isCameraInBounds(x + deltaX, y + deltaY, z)) {
-      camera.x += deltaX;
-      camera.y += deltaY;
-      // move pointer by the same amount
+  const moveCamera = useCallback(
+    (mx: number, my: number) => {
+      const scrollFactor = 1.5,
+        deltaX = mx * scrollFactor,
+        deltaY = my * scrollFactor,
+        { x, y, z } = camera;
+      if (isCameraInBounds(x + deltaX, y + deltaY, z)) {
+        camera.x += deltaX;
+        camera.y += deltaY;
+        // move pointer by the same amount
+        setShouldRender(true);
+        movePointer(deltaY, deltaY);
+      }
+    },
+    [camera, setShouldRender, isCameraInBounds, movePointer]
+  );
+
+  const zoomCamera = useCallback(
+    (_: number, deltaY: number) => {
+      // Normal zoom is quite slow, we want to scale the amount quite a bit
+      const zoomScaleFactor = 10,
+        deltaAmount = zoomScaleFactor * Math.max(deltaY),
+        { x: oldX, y: oldY, z: oldZ } = camera,
+        oldScale = { ...getScale() },
+        { width: containerWidth, height: containerHeight } = container,
+        { width, height } = cameraToScreenCoordinates(
+          oldX,
+          oldY,
+          oldZ + deltaAmount,
+          CAMERA_ANGLE,
+          getAspect()
+        ),
+        newScaleX = containerWidth / width,
+        newScaleY = containerHeight / height,
+        { x: newX, y: newY } = scaleWithAnchorPoint(
+          pointer.x,
+          pointer.y,
+          oldX,
+          oldY,
+          oldScale.x,
+          oldScale.y,
+          newScaleX,
+          newScaleY
+        );
+      let newZ = oldZ + deltaAmount;
+      newZ = newZ < 500 ? 500 : newZ;
+      newZ = newZ > 2000 ? 2000 : newZ;
       setShouldRender(true);
-      movePointer(deltaY, deltaY);
-    }
-  }, [camera, setShouldRender, isCameraInBounds, movePointer])
+      if (isCameraInBounds(oldX, oldY, newZ)) {
+        setCamera({
+          x: newX,
+          y: newY,
+          z: newZ
+        });
+        setZoom(zoomPercent(newZ === 2000 ? 0.5 : newScaleY));
+      }
+    },
+    [
+      camera,
+      container,
+      pointer,
+      setCamera,
+      setZoom,
+      setShouldRender,
+      getScale,
+      getAspect,
+      isCameraInBounds
+    ]
+  );
 
-  const zoomCamera = useCallback((_: number, deltaY: number) => {
-    // Normal zoom is quite slow, we want to scale the amount quite a bit
-    const zoomScaleFactor = 10;
-    const deltaAmount = zoomScaleFactor * Math.max(deltaY);
-    const { x: oldX, y: oldY, z: oldZ } = camera;
-    const oldScale = { ...getScale() };
-
-    const { width: containerWidth, height: containerHeight } = container;
-    const { width, height } = cameraToScreenCoordinates(
-      oldX,
-      oldY,
-      oldZ + deltaAmount,
-      CAMERA_ANGLE,
-      getAspect()
-    );
-    const newScaleX = containerWidth / width;
-    const newScaleY = containerHeight / height;
-    const { x: newX, y: newY } = scaleWithAnchorPoint(
-      pointer.x,
-      pointer.y,
-      oldX,
-      oldY,
-      oldScale.x,
-      oldScale.y,
-      newScaleX,
-      newScaleY
-    );
-    let newZ = oldZ + deltaAmount;
-    newZ = newZ < 500 ? 500 : newZ;
-    newZ = newZ > 2000 ? 2000 : newZ;
-    setShouldRender(true);
-    if (isCameraInBounds(oldX, oldY, newZ)) {
-      setCamera({
-        x: newX,
-        y: newY,
-        z: newZ
-      });
-      setZoom(newZ/1000);
-    }
-  },[camera, container, pointer, setCamera, setZoom, setShouldRender, getScale, getAspect, isCameraInBounds])
-
+  const zoomPercent = (value: number) => {
+    value = value <= 0.5 ? 0.5 : value;
+    value = value >= 2 ? 2 : value;
+    return value;
+  };
   useEffect(() => {
     const storage = {
       zoom,
