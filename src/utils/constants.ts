@@ -1,4 +1,4 @@
-import { Type, Background } from '@/types';
+import { Type, Background, Color } from '@/types';
 export const backgrounds: Background[] = [
   'dots',
   'grid',
@@ -6,6 +6,20 @@ export const backgrounds: Background[] = [
   'dash',
   'none'
 ];
+export const colors: Color[] = [
+  'zinc',
+  'slate',
+  'stone',
+  'gray',
+  'neutral',
+  'red',
+  'rose',
+  'orange',
+  'green',
+  'blue',
+  'yellow',
+  'violet'
+]
 export const types: Type[] = [
   'INT',
   'TINYINT',

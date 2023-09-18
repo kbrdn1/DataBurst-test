@@ -1,6 +1,7 @@
 import useCanvas from '@/hooks/useCanvas';
 import useEditor from '@/hooks/useEditor';
-import { backgrounds } from '@/utils/constants';
+import useTheme from '@/hooks/useTheme';
+import { backgrounds, colors } from '@/utils/constants';
 import { PropsWithChildren } from 'react';
 import Hotkeys from 'react-hot-keys';
 
@@ -11,8 +12,6 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     background,
     setBackground,
     setView,
-    collapseNavBoard,
-    setCollapseNavBoard,
     camera,
     setCamera
   } = useCanvas();
@@ -22,34 +21,58 @@ const Shortcut = ({ children }: PropsWithChildren) => {
     showHelpFeedback,
     setShowHelpFeedback,
     setShowScript,
-    setScriptView
+    setScriptView,
+    collapseNavBoard,
+    setCollapseNavBoard,
   } = useEditor();
+  const { color, setColor } = useTheme();
 
   const handleChangeBackground = (e: KeyboardEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     const index = backgrounds.indexOf(background);
     setBackground(backgrounds[index + 1] || backgrounds[0]);
   };
 
+  const handleChangeColor = (e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const index = colors.indexOf(color);
+    setColor(colors[index + 1] || colors[0]);
+  }
+
   const handleZoomPlus = (e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (zoom >= 2) return;
-    setZoom(zoom + 0.1);
+    let newZoom = zoom + 0.1;
+    let newCameraZ = camera.z - 100;
+    if (newZoom >= 2)
+      newZoom = 2
+    if (newCameraZ <= 500)
+      newCameraZ = 500
+    
+    setZoom(newZoom);
     setCamera({
       ...camera,
-      z: camera.z - 100
+      z: newCameraZ
     })
   };
 
   const handleZoomMinus = (e: KeyboardEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (zoom <= 0.5) return;
-    setZoom(zoom - 0.1);
+    let newZoom = zoom - 0.1;
+    let newCameraZ = camera.z + 100;
+    if (zoom <= 0.5)
+      newZoom = 0.5
+
+    if (camera.z >= 2000)
+      newCameraZ = 2000
+    
+    setZoom(newZoom);
     setCamera({
       ...camera,
-      z: camera.z + 100
+      z: newCameraZ
     })
   };
 
@@ -120,6 +143,10 @@ const Shortcut = ({ children }: PropsWithChildren) => {
         onKeyDown={(_, evn) => handleChangeBackground(evn)}
       >
         <Hotkeys
+          keyName='control+M,control+m,command+M,command+m'
+          onKeyDown={(_, evn) => handleChangeColor(evn)}
+        >
+        <Hotkeys
           keyName='control+plus,command+plus,control+=,command+='
           onKeyDown={(_, evn) => handleZoomPlus(evn)}
           allowRepeat
@@ -167,7 +194,8 @@ const Shortcut = ({ children }: PropsWithChildren) => {
                               keyName='control+l,command+l,control+L,command+L'
                               onKeyDown={(_, evn) => handlePDM(evn)}
                             >
-                              {children}
+                                {children}
+                                </Hotkeys>
                             </Hotkeys>
                           </Hotkeys>
                         </Hotkeys>

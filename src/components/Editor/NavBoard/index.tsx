@@ -7,14 +7,14 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip';
-import useCanvas from '@/hooks/useCanvas';
+import useEditor from '@/hooks/useEditor';
 import { ChevronLeft } from 'lucide-react';
 import Options from './Options';
 import SearchBox from './SearchBox';
 import Views from './Views';
 
 const NavBoard = () => {
-  const { collapseNavBoard, setCollapseNavBoard } = useCanvas();
+  const { collapseNavBoard, setCollapseNavBoard } = useEditor();
 
   return (
     <aside
