@@ -37,3 +37,12 @@ export type EditorProviderState = {
   collapseNavBoard: boolean;
   setCollapseNavBoard: (collapseNavBoard: boolean) => void;
 };
+
+export type ToolIconProps = {
+  _mode?: Mode;
+  name: string;
+  shortcut?: string;
+  variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined
+  size?: "default" | "sm" | "lg" | "icon" | null | undefined;
+  onClick?: () => void;
+}
