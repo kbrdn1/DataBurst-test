@@ -1,12 +1,5 @@
-import { Button } from '@/components/ui/button';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger
+  DropdownMenuShortcut
 } from '@/components/ui/dropdown-menu';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -18,13 +11,13 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip';
 import useCanvas from '@/hooks/useCanvas';
-import useTheme from '@/hooks/useTheme';
 import { View } from '@/types';
-import { Check, Layers } from 'lucide-react';
+import { Check } from 'lucide-react';
+import DropdownBackground from './DropdownBackground';
+import DropdownColor from './DropdownColor';
 
 const Views = () => {
-  const { background, setBackground, view, setView } = useCanvas();
-  const { color, setColor } = useTheme();
+  const { view, setView } = useCanvas();
   const handleView = (view: View) => {
     setView(view);
   };
@@ -33,172 +26,8 @@ const Views = () => {
       <div className='px-4 pb-1 flex items-center justify-between'>
         <h2 className='text-lg font-medium'>Views</h2>
         <div className='flex'>
-          <DropdownMenu>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      className='text-stone-300 dark:text-stone-700'
-                    >
-                      <div className='h-5 w-5 rounded-full border bg-primary'></div>
-                      <span className='sr-only'>Theme</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent className='flex gap-2 items-center'>
-                  Theme
-                  <DropdownMenuShortcut>⌘+N</DropdownMenuShortcut>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Theme</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setColor('zinc')}>
-                <div className='h-5 w-5 rounded-full border bg-[#52525b] mr-2'></div>
-                Zinc{' '}
-                {color === 'zinc' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('slate')}>
-                <div className='h-5 w-5 rounded-full border bg-[#475569] mr-2'></div>
-                Slate{' '}
-                {color === 'slate' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('stone')}>
-                <div className='h-5 w-5 rounded-full border bg-[#57534e] mr-2'></div>
-                Stone{' '}
-                {color === 'stone' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('gray')}>
-                <div className='h-5 w-5 rounded-full border bg-[#4b5563] mr-2'></div>
-                Gray{' '}
-                {color === 'gray' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('neutral')}>
-                <div className='h-5 w-5 rounded-full border bg-[#525252] mr-2'></div>
-                Neutral{' '}
-                {color === 'neutral' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('red')}>
-                <div className='h-5 w-5 rounded-full border bg-[#dc2626] mr-2'></div>
-                Red{' '}
-                {color === 'red' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('rose')}>
-                <div className='h-5 w-5 rounded-full border bg-[#e11d48] mr-2'></div>
-                Rose{' '}
-                {color === 'rose' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('orange')}>
-                <div className='h-5 w-5 rounded-full border bg-[#ea580c] mr-2'></div>
-                Orange{' '}
-                {color === 'orange' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('green')}>
-                <div className='h-5 w-5 rounded-full border bg-[#22c55e] mr-2'></div>
-                Green{' '}
-                {color === 'green' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('blue')}>
-                <div className='h-5 w-5 rounded-full border bg-[#3b82f6] mr-2'></div>
-                Blue{' '}
-                {color === 'blue' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('yellow')}>
-                <div className='h-5 w-5 rounded-full border bg-[#facc15] mr-2'></div>
-                Yellow{' '}
-                {color === 'yellow' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setColor('violet')}>
-                <div className='h-5 w-5 rounded-full border bg-[#6d28d9] mr-2'></div>
-                Violet{' '}
-                {color === 'violet' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <DropdownMenu>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant='ghost'
-                      size='icon'
-                      className='text-stone-300 dark:text-stone-700'
-                    >
-                      <Layers className='h-5 w-5' />
-                      <span className='sr-only'>Background Layers</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                </TooltipTrigger>
-                <TooltipContent className='flex gap-2 items-center'>
-                  Background Layers
-                  <DropdownMenuShortcut>⌘+B</DropdownMenuShortcut>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Background Layers</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setBackground('dots')}>
-                Dots{' '}
-                {background === 'dots' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setBackground('grid')}>
-                Grid{' '}
-                {background === 'grid' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setBackground('cross')}>
-                Cross{' '}
-                {background === 'cross' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setBackground('dash')}>
-                Dash{' '}
-                {background === 'dash' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setBackground('none')}>
-                None{' '}
-                {background === 'none' && (
-                  <Check className='w-4 h-4 ml-auto text-primary' />
-                )}
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <DropdownColor />
+          <DropdownBackground />
         </div>
       </div>
       <Separator />
