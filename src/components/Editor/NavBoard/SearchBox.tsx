@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { cn } from '@/utils';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -13,30 +11,24 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover';
+import { cn } from '@/utils';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { useState } from 'react';
 
 const frameworks = [
   {
-    value: 'next.js',
-    label: 'Next.js'
+    value: 'User',
+    label: 'User'
   },
   {
-    value: 'sveltekit',
-    label: 'SvelteKit'
+    value: 'User',
+    label: 'Post'
   },
   {
-    value: 'nuxt.js',
-    label: 'Nuxt.js'
-  },
-  {
-    value: 'remix',
-    label: 'Remix'
-  },
-  {
-    value: 'astro',
-    label: 'Astro'
+    value: 'User',
+    label: 'Comment'
   }
 ];
-import { Check, ChevronsUpDown } from 'lucide-react';
 
 const SearchBox = () => {
   const [open, setOpen] = useState(false);

@@ -1,3 +1,6 @@
-export type ScriptProps = {
-  setShow: (show: boolean) => void;
-};
+export type ScriptIconProps = {
+  _scriptView?: Mode;
+  name: string;
+  shortcut?: string;
+  onClick: () => void;
+}
