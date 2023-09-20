@@ -1,4 +1,6 @@
-import { Type, Background, Color } from '@/types';
+import { Background, Color, Type } from '@/types';
+import { radians } from "./math-utils";
+
 export const backgrounds: Background[] = [
   'dots',
   'grid',
@@ -19,6 +21,26 @@ export const colors: Color[] = [
   'blue',
   'yellow',
   'violet'
+]
+
+export type ColorItem = {
+  name: Color;
+  hex: string;
+}
+
+export const colorItems: ColorItem[] = [
+  { name: 'zinc', hex: '#52525b' },
+  { name: 'slate', hex: '#475569' },
+  { name: 'stone', hex: '#57534e' },
+  { name: 'gray', hex: '#4b5563' },
+  { name: 'neutral', hex: '#525252' },
+  { name: 'red', hex: '#dc2626' },
+  { name: 'rose', hex: '#e11d48' },
+  { name: 'orange', hex: '#ea580c' },
+  { name: 'green', hex: '#22c55e' },
+  { name: 'blue', hex: '#3b82f6' },
+  { name: 'yellow', hex: '#facc15' },
+  { name: 'violet', hex: '#6d28d9' }
 ]
 export const types: Type[] = [
   'INT',
@@ -64,8 +86,6 @@ export const types: Type[] = [
   'MULTIPOLYGON',
   'GEOMETRYCOLLECTION'
 ];
-
-import { radians } from "./math-utils";
 
 export const CAMERA_ANGLE = radians(30);
 export const RECT_W = 1000;

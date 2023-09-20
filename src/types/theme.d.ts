@@ -1,4 +1,4 @@
-// transfert to editor
+import { Background } from ".";
 export type Theme = 'dark' | 'light' | 'system';
 
 export type Color =
@@ -28,3 +28,12 @@ export type ThemeProviderState = {
   color: Color;
   setColor: (color: Color) => void;
 };
+
+export type ColorItemProps = {
+  _color: Color;
+  hex: string;
+}
+
+export type BackgroundItemProps = {
+  _background: Background;
+}
