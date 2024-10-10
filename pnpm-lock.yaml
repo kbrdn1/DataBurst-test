@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@hookform/resolvers':
-    specifier: ^3.3.1
-    version: 3.3.1(react-hook-form@7.46.1)
+    specifier: ^3.9.0
+    version: 3.9.0(react-hook-form@7.46.1)
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.7)(@types/react@18.2.15)(react-dom@18.2.0)(react@18.2.0)
@@ -76,7 +76,7 @@ dependencies:
     version: 7.46.1(react@18.2.0)
   react-hot-keys:
     specifier: ^2.7.2
-    version: 2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0)
+    version: 2.7.2(@babel/runtime@7.25.7)(react-dom@18.2.0)(react@18.2.0)
   react-hotkeys-hook:
     specifier: ^4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
@@ -338,6 +338,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: false
+
+  /@babel/runtime@7.25.7:
+    resolution: {integrity: sha512-FjoyLe754PMiYsFaN5C94ttGiOmBNYTf6pLr4xXHAT5uctHb092PBszndLDR5XA/jghQvn4n7JMHl7dmTgbm9w==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
     dev: false
 
   /@babel/template@7.22.5:
@@ -639,8 +646,8 @@ packages:
     resolution: {integrity: sha512-m0G6wlnhm/AX0H12IOWtK8gASEMffnX08RtKkCgTdHb9JpHKGloI7icFfLg9ZmQeavcvR0PKmzxClyuFPSjKWw==}
     dev: false
 
-  /@hookform/resolvers@3.3.1(react-hook-form@7.46.1):
-    resolution: {integrity: sha512-K7KCKRKjymxIB90nHDQ7b9nli474ru99ZbqxiqDAWYsYhOsU3/4qLxW91y+1n04ic13ajjZ66L3aXbNef8PELQ==}
+  /@hookform/resolvers@3.9.0(react-hook-form@7.46.1):
+    resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
     peerDependencies:
       react-hook-form: ^7.0.0
     dependencies:
@@ -3015,14 +3022,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-hot-keys@2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0):
+  /react-hot-keys@2.7.2(@babel/runtime@7.25.7)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Z7eSh7SU6s52+zP+vkfFoNk0x4kgEmnwqDiyACKv53crK2AZ7FUaBLnf+vxLor3dvtId9murLmKOsrJeYgeHWw==}
     peerDependencies:
       '@babel/runtime': '>=7.10.0'
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.25.7
       hotkeys-js: 3.12.0
       prop-types: 15.8.1
       react: 18.2.0
@@ -3139,6 +3146,10 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+    dev: false
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
     dev: false
 
   /resolve-from@4.0.0:
