@@ -76,7 +76,7 @@ dependencies:
     version: 7.46.1(react@18.2.0)
   react-hot-keys:
     specifier: ^2.7.2
-    version: 2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0)
+    version: 2.7.2(@babel/runtime@7.25.7)(react-dom@18.2.0)(react@18.2.0)
   react-hotkeys-hook:
     specifier: ^4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
@@ -119,8 +119,8 @@ devDependencies:
     specifier: ^4.6.0
     version: 4.6.0(eslint@8.45.0)
   eslint-plugin-react-refresh:
-    specifier: ^0.4.3
-    version: 0.4.3(eslint@8.45.0)
+    specifier: ^0.4.13
+    version: 0.4.13(eslint@8.45.0)
   postcss:
     specifier: ^8.4.29
     version: 8.4.29
@@ -338,6 +338,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: false
+
+  /@babel/runtime@7.25.7:
+    resolution: {integrity: sha512-FjoyLe754PMiYsFaN5C94ttGiOmBNYTf6pLr4xXHAT5uctHb092PBszndLDR5XA/jghQvn4n7JMHl7dmTgbm9w==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.14.1
     dev: false
 
   /@babel/template@7.22.5:
@@ -2319,8 +2326,8 @@ packages:
       eslint: 8.45.0
     dev: true
 
-  /eslint-plugin-react-refresh@0.4.3(eslint@8.45.0):
-    resolution: {integrity: sha512-Hh0wv8bUNY877+sI0BlCUlsS0TYYQqvzEwJsJJPM2WF4RnTStSnSR3zdJYa2nPOJgg3UghXi54lVyMSmpCalzA==}
+  /eslint-plugin-react-refresh@0.4.13(eslint@8.45.0):
+    resolution: {integrity: sha512-f1EppwrpJRWmqDTyvAyomFVDYRtrS7iTEqv3nokETnMiMzs2SSTmKRTACce4O2p4jYyowiSMvpdwC/RLcMFhuQ==}
     peerDependencies:
       eslint: '>=7'
     dependencies:
@@ -3015,14 +3022,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-hot-keys@2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0):
+  /react-hot-keys@2.7.2(@babel/runtime@7.25.7)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Z7eSh7SU6s52+zP+vkfFoNk0x4kgEmnwqDiyACKv53crK2AZ7FUaBLnf+vxLor3dvtId9murLmKOsrJeYgeHWw==}
     peerDependencies:
       '@babel/runtime': '>=7.10.0'
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.25.7
       hotkeys-js: 3.12.0
       prop-types: 15.8.1
       react: 18.2.0
@@ -3139,6 +3146,10 @@ packages:
 
   /regenerator-runtime@0.14.0:
     resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+    dev: false
+
+  /regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
     dev: false
 
   /resolve-from@4.0.0:
