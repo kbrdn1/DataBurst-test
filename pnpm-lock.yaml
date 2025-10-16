@@ -76,7 +76,7 @@ dependencies:
     version: 7.46.1(react@18.2.0)
   react-hot-keys:
     specifier: ^2.7.2
-    version: 2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0)
+    version: 2.7.2(@babel/runtime@7.28.4)(react-dom@18.2.0)(react@18.2.0)
   react-hotkeys-hook:
     specifier: ^4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
@@ -119,8 +119,8 @@ devDependencies:
     specifier: ^4.6.0
     version: 4.6.0(eslint@8.45.0)
   eslint-plugin-react-refresh:
-    specifier: ^0.4.3
-    version: 0.4.3(eslint@8.45.0)
+    specifier: ^0.4.24
+    version: 0.4.24(eslint@8.45.0)
   postcss:
     specifier: ^8.4.29
     version: 8.4.29
@@ -338,6 +338,11 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.0
+    dev: false
+
+  /@babel/runtime@7.28.4:
+    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
+    engines: {node: '>=6.9.0'}
     dev: false
 
   /@babel/template@7.22.5:
@@ -2319,10 +2324,10 @@ packages:
       eslint: 8.45.0
     dev: true
 
-  /eslint-plugin-react-refresh@0.4.3(eslint@8.45.0):
-    resolution: {integrity: sha512-Hh0wv8bUNY877+sI0BlCUlsS0TYYQqvzEwJsJJPM2WF4RnTStSnSR3zdJYa2nPOJgg3UghXi54lVyMSmpCalzA==}
+  /eslint-plugin-react-refresh@0.4.24(eslint@8.45.0):
+    resolution: {integrity: sha512-nLHIW7TEq3aLrEYWpVaJ1dRgFR+wLDPN8e8FpYAql/bMV2oBEfC37K0gLEGgv9fy66juNShSMV8OkTqzltcG/w==}
     peerDependencies:
-      eslint: '>=7'
+      eslint: '>=8.40'
     dependencies:
       eslint: 8.45.0
     dev: true
@@ -3015,14 +3020,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-hot-keys@2.7.2(@babel/runtime@7.22.15)(react-dom@18.2.0)(react@18.2.0):
+  /react-hot-keys@2.7.2(@babel/runtime@7.28.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Z7eSh7SU6s52+zP+vkfFoNk0x4kgEmnwqDiyACKv53crK2AZ7FUaBLnf+vxLor3dvtId9murLmKOsrJeYgeHWw==}
     peerDependencies:
       '@babel/runtime': '>=7.10.0'
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@babel/runtime': 7.22.15
+      '@babel/runtime': 7.28.4
       hotkeys-js: 3.12.0
       prop-types: 15.8.1
       react: 18.2.0
